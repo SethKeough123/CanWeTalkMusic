@@ -27,15 +27,15 @@
               status.textContent = "Playing audio from GitHub.";
             })
             .catch(err => {
-              status.textContent = "Play Tevin Campbell - Can We Talk";
+              status.textContent = "Audio loaded, but autoplay was blocked. Click play.";
               console.warn("Autoplay blocked:", err);
             });
         } else {
-          status.textContent = "Your Audio Isn't Playing And Working";
+          status.textContent = "Audio file not found on GitHub.";
         }
       })
       .catch(error => {
-        status.textContent = "Er";
+        status.textContent = "Error accessing GitHub audio file.";
         console.error(error);
       });
   </script>
