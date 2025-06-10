@@ -1,14 +1,43 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Tevin Campbell - Can We Talk Music</title>
-  </head>
-  <body>
-    <h1>Tevin Campbell - Can We Talk</h1>
-    <audio controls>
-      <source src="audio.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
-    <p>This is my HTML page.</p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GitHub Audio Player</title>
+</head>
+<body>
+  <h2>Audio Player (from GitHub)</h2>
+  <audio id="audioPlayer" controls>
+    Your browser does not support the audio element.
+  </audio>
+  <p id="status"></p>
+
+  <script>
+    const audio = document.getElementById('audioPlayer');
+    const status = document.getElementById('status');
+
+    // Replace with your raw GitHub URL
+    const audioFile = 'https://raw.githubusercontent.com/yourusername/your-repo/main/audio.mp3';
+
+    fetch(audioFile, { method: 'HEAD' })
+      .then(response => {
+        if (response.ok) {
+          audio.src = audioFile;
+          audio.play()
+            .then(() => {
+              status.textContent = "Playing audio from GitHub.";
+            })
+            .catch(err => {
+              status.textContent = "Audio loaded, but autoplay was blocked. Click play.";
+              console.warn("Autoplay blocked:", err);
+            });
+        } else {
+          status.textContent = "Audio file not found on GitHub.";
+        }
+      })
+      .catch(error => {
+        status.textContent = "Error accessing GitHub audio file.";
+        console.error(error);
+      });
+  </script>
+</body>
 </html>
